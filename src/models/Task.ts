@@ -11,7 +11,7 @@ const taskStatus = {
 export type TaskStatus = typeof taskStatus[keyof typeof taskStatus]
 
 export interface ITask extends Document  {
-    projectName: string;
+    name: string;
     description: string;
     project: Types.ObjectId;
     status: TaskStatus;
