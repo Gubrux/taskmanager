@@ -5,36 +5,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "client/.eslintrc.cjs": true,
-        "client/.gitignore": true,
-        "client/package.json": true,
-        "client/package-lock.json": true,
-        "client/postcss.config.js": true,
-        "client/src/vite-env.d.ts": true,
-        "client/node_modules": true,
-        "server": true,
-        "client/vite.config.ts": true,
-        "client/tsconfig.node.json": true,
-        "client/tsconfig.json": true,
-        "client/tailwind.config.js": true,
-        "client/README.md": true,
-        "client/index.html": true
+        "**/Thumbs.db": true
     },
-    "hide-files.files": [
-        "client/.eslintrc.cjs",
-        "client/.gitignore",
-        "client/package.json",
-        "client/package-lock.json",
-        "client/postcss.config.js",
-        "client/src/vite-env.d.ts",
-        "client/node_modules",
-        "server",
-        "client/vite.config.ts",
-        "client/tsconfig.node.json",
-        "client/tsconfig.json",
-        "client/tailwind.config.js",
-        "client/README.md",
-        "client/index.html"
-    ]
+    "hide-files.files": []
 }
