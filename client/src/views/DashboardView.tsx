@@ -7,7 +7,7 @@ import { deleteProject, getProjects } from "@/api/ProjectAPI";
 import { toast } from "react-toastify";
 
 export default function DashboardView() {
-    const { data, isError, isLoading } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["projects"],
         queryFn: getProjects,
     });
@@ -23,8 +23,6 @@ export default function DashboardView() {
         },
     });
     if (isLoading) return "Cargando..";
-    console.log(data);
-    console.log(isError);
     if (data)
         return (
             <>
