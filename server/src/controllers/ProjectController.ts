@@ -7,7 +7,7 @@ export class ProjectController {
         const project = new Project(req.body);
         try {
             await project.save();
-            res.send("Project created");
+            res.send("Proyecto creado");
         } catch (error) {
             console.log(colors.bgRed.bold(`Error creating the project`));
         }
