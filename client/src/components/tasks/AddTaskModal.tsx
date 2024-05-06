@@ -27,14 +27,14 @@ export default function AddTaskModal() {
         reset,
         formState: { errors },
     } = useForm({ defaultValues: initialValues });
-    const queryclient = useQueryClient();
+    const queryClient = useQueryClient();
     const { mutate } = useMutation({
         mutationFn: createTask,
         onError: (error) => {
             toast.error(error.message);
         },
         onSuccess: (data) => {
-            queryclient.invalidateQueries({
+            queryClient.invalidateQueries({
                 queryKey: ["editProject", projectId],
             });
             toast.success(data);
