@@ -4,10 +4,10 @@ export const corsConfig: CorsOptions = {
     origin: function (origin, callback) {
         const whitelist = [process.env.FRONTEND_URL];
 
-        if (whitelist.includes(origin)) {
+        if (whitelist.includes(origin) || !origin) {
             callback(null, true);
         } else {
-            callback(new Error("Error con el fakin cors"));
+            callback(new Error("Error con el cors"));
         }
     },
 };
