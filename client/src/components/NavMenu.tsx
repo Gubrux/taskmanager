@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function NavMenu() {
     return (
         <Popover className="relative">
-            <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 p-1 rounded-lg bg-red-600">
+            <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 p-1 rounded-lg bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 transition-colors">
                 <Bars3Icon className="w-8 h-8 text-white " />
             </Popover.Button>
 
