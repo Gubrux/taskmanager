@@ -3,7 +3,6 @@ import User from "../models/User";
 import { checkPassword, hashPassword } from "../utils/auth";
 import Token from "../models/Token";
 import { generateToken } from "../utils/token";
-import { transporter } from "../config/nodemailer";
 import { AuthEmail } from "../emails/AuthEmail";
 
 export class AuthController {
@@ -92,6 +91,38 @@ export class AuthController {
                 return res.status(401).json({ error: error.message });
             }
             res.send("Usuario logueado!!");
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Internal Server Error");
+        }
+    };
+    static requestConfirmationCode = async (req: Request, res: Response) => {
+        try {
+            const { email } = req.body;
+            const user = await User.findOne({ email });
+            if (!user) {
+                const error = new Error("El usuario no esta registrado");
+                return res.status(409).json({ error: error.message });
+            }
+            if (user.confirmed) {
+                const error = new Error("La cuenta ya ha sido confirmada");
+                return res.status(403).json({ error: error.message });
+            }
+
+            //generar el token
+            const token = new Token();
+            token.token = generateToken();
+            token.user = user.id;
+
+            // Send confirmation email
+            AuthEmail.sendConfirmationEmail({
+                email: user.email,
+                name: user.name,
+                token: token.token,
+            });
+            // Save the user and the token
+            await Promise.allSettled([token.save(), user.save()]);
+            res.send("se envio un nuevo token");
         } catch (error) {
             console.error(error);
             res.status(500).send("Internal Server Error");
