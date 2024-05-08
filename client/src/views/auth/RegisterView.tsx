@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { UserRegistrationForm } from "@/types/index";
 import { useMutation } from "@tanstack/react-query";
-import ErrorMessage from "@/components/ErrorMessage";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createAccount } from "@/api/AuthAPI";
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default function RegisterView() {
     const initialValues: UserRegistrationForm = {
@@ -149,7 +149,13 @@ export default function RegisterView() {
                     to="/auth/login"
                     className="text-white hover:text-sky-500"
                 >
-                    Ya tienes cuenta? Inicia Sesión{" "}
+                    Ya tienes cuenta? Inicia Sesión
+                </Link>
+                <Link
+                    to="/auth/forgot-password"
+                    className="text-white font-semibold hover:text-sky-500"
+                >
+                    ¿Olivdaste tu contraseña? Reestablecela
                 </Link>
             </nav>
         </>

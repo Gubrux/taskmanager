@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { UserLoginForm } from "@/types/index";
-import ErrorMessage from "@/components/ErrorMessage";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { authenticateUser } from "@/api/AuthAPI";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { UserLoginForm } from "@/types/index";
+import { authenticateUser } from "@/api/AuthAPI";
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default function LoginView() {
     const initialValues: UserLoginForm = {
@@ -38,7 +38,7 @@ export default function LoginView() {
             </p>
             <form
                 onSubmit={handleSubmit(handleLogin)}
-                className="space-y-8 p-10 bg-white"
+                className="space-y-8 p-10 mt-5 bg-white"
                 noValidate
             >
                 <div className="flex flex-col gap-5">
@@ -89,7 +89,13 @@ export default function LoginView() {
                     to="/auth/register"
                     className="text-white font-semibold hover:text-sky-500"
                 >
-                    No tienes cuenta? Registrate aqui
+                    No tienes cuenta? Registrate
+                </Link>
+                <Link
+                    to="/auth/forgot-password"
+                    className="text-white font-semibold hover:text-sky-500"
+                >
+                    ¿Olivdaste tu contraseña? Reestablecela
                 </Link>
             </nav>
         </>
