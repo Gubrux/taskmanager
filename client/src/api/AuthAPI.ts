@@ -5,8 +5,10 @@ import {
     ForgotPasswordForm,
     NewPasswordForm,
     RequestConfirmationCodeForm,
+    User,
     UserLoginForm,
     UserRegistrationForm,
+    userSchema,
 } from "@/types/index";
 import {} from "@tanstack/react-query";
 
@@ -51,8 +53,8 @@ export async function requestConfirmationCode(
 export async function authenticateUser(formData: UserLoginForm) {
     try {
         const url = "/auth/login";
-        const { data } = await api.post(url, formData);
-        localStorage.setItem("token", data.token);
+        const { data } = await api.post<string>(url, formData);
+        localStorage.setItem("AUTH_TOKEN", data);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
@@ -93,6 +95,21 @@ export async function updatePasswordWithToken({
         const url = `/auth/update-password/${token}`;
         const { data } = await api.post(url, formData);
         return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error);
+        }
+    }
+}
+
+export async function getUser() {
+    try {
+        const url = "/auth/user";
+        const { data } = await api.get<User>(url);
+        const response = userSchema.safeParse(data);
+        if (response.success) {
+            return response.data;
+        }
     } catch (error) {
         if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error);
