@@ -19,6 +19,10 @@ export async function createProject(formData: ProjectFormData) {
 }
 
 export async function getProjects() {
+    const token = localStorage.getItem("AUTH_TOKEN");
+    if (!token) {
+        throw new Error("Token not found");
+    }
     try {
         const url = "./projects";
         const { data } = await api.get(url);

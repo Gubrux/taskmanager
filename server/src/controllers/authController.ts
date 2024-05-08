@@ -91,7 +91,7 @@ export class AuthController {
                 const error = new Error("Contraseña incorrecta");
                 return res.status(401).json({ error: error.message });
             }
-            const token = generateJWT({id: user._id});
+            const token = generateJWT({ id: user._id });
             res.send(token);
         } catch (error) {
             console.error(error);
@@ -186,5 +186,8 @@ export class AuthController {
             console.error(error);
             res.status(500).send("Internal Server Error");
         }
+    };
+    static user = async (req: Request, res: Response) => {
+        return res.json(req.user);
     };
 }
