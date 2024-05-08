@@ -52,6 +52,7 @@ export async function authenticateUser(formData: UserLoginForm) {
     try {
         const url = "/auth/login";
         const { data } = await api.post(url, formData);
+        localStorage.setItem("token", data.token);
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {

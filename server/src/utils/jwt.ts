@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import Types from "mongoose";
 
 type UserPayLoad = {
-    id: Types.ObjectId;
+    id: Types.ObjectId,
 };
 
 export const generateJWT = (payload: UserPayLoad) => {
