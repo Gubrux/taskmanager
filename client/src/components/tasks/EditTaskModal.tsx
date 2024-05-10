@@ -110,7 +110,7 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
                                     />
                                     <input
                                         type="submit"
-                                        className=" bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                                        className=" bg-sky-500 hover:hover-gradient w-full p-3  text-white font-black  text-xl cursor-pointer"
                                         value="Guardar Tarea"
                                     />
                                 </form>

@@ -33,7 +33,7 @@ export default function DashboardView() {
                 <nav className="my-5">
                     <Link
                         to={"/Projects/create"}
-                        className="bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
+                        className="bg-sky-500 hover:hover-gradient px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
                     >
                         Nuevo Proyecto
                     </Link>
