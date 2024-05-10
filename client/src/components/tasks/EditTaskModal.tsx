@@ -36,7 +36,7 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({
-                queryKey: ["editProject", projectId],
+                queryKey: ["project", projectId],
             });
             queryClient.invalidateQueries({
                 queryKey: ["editTask", taskId],
