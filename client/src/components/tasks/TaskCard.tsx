@@ -34,6 +34,9 @@ export default function TaskCard({ task }: TaskCardProps) {
                 <button
                     type="button"
                     className="text-xl font-bold text-slate-600 text-left"
+                    onClick={() =>
+                        navigate(location.pathname + `?viewTask=${task._id}`)
+                    }
                 >
                     {task.name}
                 </button>
