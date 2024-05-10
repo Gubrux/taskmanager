@@ -79,14 +79,14 @@ export default function ForgotPasswordView() {
             <nav className="mt-10 flex flex-col space-y-4">
                 <Link
                     to="/auth/login"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 font-normal hover:text-sky-500"
                 >
                     ¿Ya tienes cuenta? Iniciar Sesión
                 </Link>
 
                 <Link
                     to="/auth/register"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 hover:text-sky-500 font-normal"
                 >
                     ¿No tienes cuenta? Crea una
                 </Link>
