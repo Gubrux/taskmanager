@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { UserRegistrationForm } from "@/types/index";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createAccount } from "@/api/AuthAPI";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -13,7 +13,7 @@ export default function RegisterView() {
         password: "",
         password_confirmation: "",
     };
-
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -30,6 +30,7 @@ export default function RegisterView() {
         onSuccess: (data) => {
             toast.success(data);
             reset();
+            navigate("/auth/confirm-account");
         },
     });
 
