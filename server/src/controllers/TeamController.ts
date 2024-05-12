@@ -13,10 +13,12 @@ export class TeamMemberController {
         res.json(user);
     };
     static getProjectTeam = async (req: Request, res: Response) => {
-        const project = await (await Project.findById(req.project.id)).populate({
+        const project = await (
+            await Project.findById(req.project.id)
+        ).populate({
             path: "team",
             select: "id email name",
-        })
+        });
         res.json(project.team);
     };
     static addMemberById = async (req: Request, res: Response) => {
@@ -40,13 +42,13 @@ export class TeamMemberController {
         res.send("Usuario agregado al equipo!!");
     };
     static removeMemberById = async (req: Request, res: Response) => {
-        const { id } = req.body;
-        if (!req.project.team.some((team) => team.toString() === id)) {
+        const { userId } = req.params;
+        if (!req.project.team.some((team) => team.toString() === userId)) {
             const error = new Error("Usuario no pertenece al equipo");
             return res.status(404).json({ error: error.message });
         }
         req.project.team = req.project.team.filter(
-            (teamMember) => teamMember.toString() !== id
+            (teamMember) => teamMember.toString() !== userId
         );
         await req.project.save();
         res.send("Usuario eliminado del equipo!!");
