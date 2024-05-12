@@ -43,7 +43,7 @@ export default function CreateProjectView() {
                         to={"/"}
                         className="bg-red-500 hover:bg-gradient-to-r from-red-500 via-red-400 to-red-500 px-10 py-3 text-white text-xl font-bold cursor-pointer"
                     >
-                        Volver
+                        Cancelar
                     </Link>
                 </nav>
                 <form
