@@ -20,26 +20,37 @@ export default function ProjectDetailsView() {
     if (data)
         return (
             <>
-                <h1 className="text-5xl font-black">{data.projectName}</h1>
+                <h2 className="text-5xl font-black">{data.projectName}</h2>
                 <p className="text-2xl font-light text-gray-500 mt-5">
                     {data.description}
                 </p>
-                <nav>
+                <nav className="my-5 flex gap-3">
+                    <Link
+                        className="bg-rose-500 hover:bg-gradient-to-r from-rose-400 to-cyan-500 px-10 py-3 text-white text-xl font-semibold cursor-pointer transition-colors mt-5"
+                        to={`/`}
+                    >
+                        Volver al dashboard
+                    </Link>
                     <button
                         type="button"
-                        className="bg-sky-500 hover:hover-gradient px-10 py-3 text-white text-xl font-semibold cursor-pointer transition-colors mt-5"
+                        className="bg-sky-600 hover:hover-gradient px-10 py-3 text-white text-xl font-semibold cursor-pointer transition-colors mt-5"
                         onClick={() =>
                             navigate(location.pathname + "?newTask=true")
                         }
                     >
                         Agregar Tarea
                     </button>
-                    <Link to={"team"}>Colaboradores</Link>
-                    <TaskList tasks={data.tasks} />
-                    <AddTaskModal />
-                    <EdistTaskData />
-                    <TaskModalDetails />
+                    <Link
+                        className="bg-teal-500 hover:hover-gradient px-10 py-3 text-white text-xl font-semibold cursor-pointer transition-colors mt-5"
+                        to={"team"}
+                    >
+                        Colaboradores
+                    </Link>
                 </nav>
+                <TaskList tasks={data.tasks} />
+                <AddTaskModal />
+                <EdistTaskData />
+                <TaskModalDetails />
             </>
         );
 }
