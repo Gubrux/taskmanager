@@ -4,7 +4,11 @@ import { body, param } from "express-validator";
 import { TaskController } from "../controllers/TaskController";
 import { handleInputErrors } from "../middleware/validation";
 import { projectExists } from "../middleware/project";
-import { taskBelongsToProject, taskExists } from "../middleware/task";
+import {
+    hasAutorization,
+    taskBelongsToProject,
+    taskExists,
+} from "../middleware/task";
 import { authenticate } from "../middleware/auth";
 import { TeamMemberController } from "../controllers/TeamController";
 
@@ -67,6 +71,7 @@ router.param("projectId", projectExists);
 // Create task
 router.post(
     "/:projectId/tasks",
+    hasAutorization,
     body("name").notEmpty().withMessage("El nombre de la tarea es requerido"),
     body("description")
         .notEmpty()
@@ -91,6 +96,7 @@ router.get(
 // Update task
 router.put(
     "/:projectId/tasks/:taskId",
+    hasAutorization,
     param("taskId").isMongoId().withMessage("ID de tarea inválido"),
     body("name").notEmpty().withMessage("El nombre de la tarea es requerido"),
     body("description")
@@ -102,7 +108,8 @@ router.put(
 // delete task
 router.delete(
     "/:projectId/tasks/:taskId",
-    param("taskId").isMongoId().withMessage("ID de tarea inválido"),
+    hasAutorization,
+    param("taskId").isMongoId().withMessage("Accion no permitida"),
     handleInputErrors,
     TaskController.deleteTask
 );
