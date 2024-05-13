@@ -11,6 +11,7 @@ import {
 } from "../middleware/task";
 import { authenticate } from "../middleware/auth";
 import { TeamMemberController } from "../controllers/TeamController";
+import { NoteController } from "../controllers/NoteController";
 
 const router = Router();
 
@@ -149,5 +150,22 @@ router.delete(
     handleInputErrors,
     TeamMemberController.removeMemberById
 );
-
+// routes for notes
+router.post(
+    "/:projectId/tasks/:taskId/notes",
+    body("content")
+        .notEmpty()
+        .withMessage("El contenido de la nota es requerido"),
+    handleInputErrors,
+    NoteController.createNote
+);
+// get notes
+router.get("/:projectId/tasks/:taskId/notes", NoteController.getTaskNotes);
+// delete note
+router.delete(
+    "/:projectId/tasks/:taskId/notes/:noteId",
+    param("noteId").isMongoId().withMessage("ID no válido"),
+    handleInputErrors,
+    NoteController.deleteNote
+);
 export default router;
