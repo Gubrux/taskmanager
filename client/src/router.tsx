@@ -14,6 +14,9 @@ import CreateProjectView from "@/views/projects/CreateProjectView";
 import ProjectDetailsView from "@/views/projects/ProjectDetailsView";
 
 import "./index.css";
+import ProfileView from "@/views/profile/ProfileView";
+import ChangePasswordView from "@/views/profile/ChangePasswordView";
+import ProfileLayout from "@/layouts/ProfileLayout";
 
 export default function Router() {
     return (
@@ -38,6 +41,13 @@ export default function Router() {
                         path="/projects/:projectId/team"
                         element={<ProjectTeamView />}
                     />
+                    <Route element={<ProfileLayout />}>
+                        <Route path="/profile" element={<ProfileView />} />
+                        <Route
+                            path="/profile/password"
+                            element={<ChangePasswordView />}
+                        />
+                    </Route>
                 </Route>
                 {/* auth routes */}
                 <Route element={<AuthLayout />}>
