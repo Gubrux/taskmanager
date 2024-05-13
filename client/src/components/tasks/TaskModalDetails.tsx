@@ -106,16 +106,31 @@ export default function TaskModalDetails() {
                                         <p className="text-lg text-slate-500 mb-2">
                                             Descripción:{data.description}
                                         </p>
-                                        {data.completedBy && (
-                                            <p>
-                                                <span className="font-bold text-slate-600">
-                                                    Ultima actualizacion hecha
-                                                    por:{" "}
-                                                </span>
-                                                {data.completedBy.name} -{" "}
-                                                {data.completedBy.email}
-                                            </p>
-                                        )}
+                                        <p className="text-lg text-slate-500 mb-2">
+                                            Historial de cambios
+                                        </p>
+                                        <ul className="list-decimal ml-6">
+                                            {data.completedBy.map(
+                                                (activitiesLog) => (
+                                                    <li key={activitiesLog._id}>
+                                                        <span className="font-bold text-slate-600">
+                                                            {
+                                                                statusTranslations[
+                                                                    activitiesLog
+                                                                        .status
+                                                                ]
+                                                            }
+                                                        </span>{" "}
+                                                        por:{" "}
+                                                        {
+                                                            activitiesLog.user
+                                                                .name
+                                                        }
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+
                                         <div className="my-5 space-y-3">
                                             <label className="font-bold">
                                                 Estado Actual:
