@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ForgotPasswordForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
@@ -9,6 +9,7 @@ export default function ForgotPasswordView() {
     const initialValues: ForgotPasswordForm = {
         email: "",
     };
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -24,6 +25,7 @@ export default function ForgotPasswordView() {
         onSuccess: () => {
             toast.success("Instrucciones enviadas");
             reset();
+            navigate("/auth/new-password");
         },
     });
 
@@ -72,21 +74,21 @@ export default function ForgotPasswordView() {
                 <input
                     type="submit"
                     value="Enviar Instrucciones"
-                    className="bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                    className="bg-sky-500 hover:hover-gradient w-full p-3  text-white font-black  text-xl cursor-pointer"
                 />
             </form>
 
             <nav className="mt-10 flex flex-col space-y-4">
                 <Link
                     to="/auth/login"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 font-normal hover:text-sky-500"
                 >
                     ¿Ya tienes cuenta? Iniciar Sesión
                 </Link>
 
                 <Link
                     to="/auth/register"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 hover:text-sky-500 font-normal"
                 >
                     ¿No tienes cuenta? Crea una
                 </Link>

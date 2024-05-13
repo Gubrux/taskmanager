@@ -43,7 +43,7 @@ export default function CreateProjectView() {
                         to={"/"}
                         className="bg-red-500 hover:bg-gradient-to-r from-red-500 via-red-400 to-red-500 px-10 py-3 text-white text-xl font-bold cursor-pointer"
                     >
-                        Volver
+                        Cancelar
                     </Link>
                 </nav>
                 <form
@@ -56,7 +56,7 @@ export default function CreateProjectView() {
                     <input
                         type="submit"
                         value="Crear Proyecto"
-                        className="bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors"
+                        className="bg-sky-500 hover:bg-gradient-to-r hover:hover-gradient w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors"
                     />
                 </form>
             </div>

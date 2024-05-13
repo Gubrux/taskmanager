@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { UserRegistrationForm } from "@/types/index";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createAccount } from "@/api/AuthAPI";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -13,7 +13,7 @@ export default function RegisterView() {
         password: "",
         password_confirmation: "",
     };
-
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -30,6 +30,7 @@ export default function RegisterView() {
         onSuccess: (data) => {
             toast.success(data);
             reset();
+            navigate("/auth/confirm-account");
         },
     });
 
@@ -141,7 +142,7 @@ export default function RegisterView() {
                 <input
                     type="submit"
                     value="Registrarme"
-                    className="bg-sky-500 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                    className="bg-sky-500 hover:hover-gradient w-full p-3  text-white font-black  text-xl cursor-pointer"
                 />
             </form>
             <nav className="mt-2 flex flex-col font-semibold space-y-4">

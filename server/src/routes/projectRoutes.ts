@@ -4,48 +4,64 @@ import { body, param } from "express-validator";
 import { TaskController } from "../controllers/TaskController";
 import { handleInputErrors } from "../middleware/validation";
 import { projectExists } from "../middleware/project";
-import { taskBelongsToProject, taskExists } from "../middleware/task";
+import {
+    hasAutorization,
+    taskBelongsToProject,
+    taskExists,
+} from "../middleware/task";
 import { authenticate } from "../middleware/auth";
+import { TeamMemberController } from "../controllers/TeamController";
 
 const router = Router();
 
 router.use(authenticate);
 
+// Routes for create project
 router.post(
     "/",
-    body("projectName").notEmpty().withMessage("Project name is required"),
-    body("clientName").notEmpty().withMessage("Project client is required"),
+    body("projectName")
+        .notEmpty()
+        .withMessage("El nombre del proyecto es requerido"),
+    body("clientName")
+        .notEmpty()
+        .withMessage("El cliente del proyecto es requerido"),
     body("description")
         .notEmpty()
-        .withMessage("Project description is required"),
+        .withMessage("La descripción del proyecto es requerida"),
     handleInputErrors,
     ProjectController.createProject
 );
-
+// Get all projects
 router.get("/", ProjectController.getAllProjects);
 
+// Get project by id
 router.get(
     "/:id",
-    param("id").isMongoId().withMessage("Invalid project id"),
+    param("id").isMongoId().withMessage("ID de proyecto inválido"),
     handleInputErrors,
     ProjectController.getAllProjectById
 );
 
+// Update project
 router.put(
     "/:id",
-    param("id").isMongoId().withMessage("Invalid project id"),
-    body("projectName").notEmpty().withMessage("Project name is required"),
-    body("clientName").notEmpty().withMessage("Project client is required"),
+    param("id").isMongoId().withMessage("ID de proyecto inválido"),
+    body("projectName")
+        .notEmpty()
+        .withMessage("El nombre del proyecto es requerido"),
+    body("clientName")
+        .notEmpty()
+        .withMessage("El cliente del proyecto es requerido"),
     body("description")
         .notEmpty()
-        .withMessage("Project description is required"),
+        .withMessage("La descripción del proyecto es requerida"),
     handleInputErrors,
     ProjectController.updateProject
 );
 
 router.delete(
     "/:id",
-    param("id").isMongoId().withMessage("Invalid project id"),
+    param("id").isMongoId().withMessage("ID de proyecto inválido"),
     handleInputErrors,
     ProjectController.deleteProject
 );
@@ -55,8 +71,11 @@ router.param("projectId", projectExists);
 // Create task
 router.post(
     "/:projectId/tasks",
-    body("name").notEmpty().withMessage("task name is required"),
-    body("description").notEmpty().withMessage("task description is required"),
+    hasAutorization,
+    body("name").notEmpty().withMessage("El nombre de la tarea es requerido"),
+    body("description")
+        .notEmpty()
+        .withMessage("La descripción de la tarea es requerida"),
     handleInputErrors,
     TaskController.createTask
 );
@@ -69,7 +88,7 @@ router.param("taskId", taskExists);
 router.param("taskId", taskBelongsToProject);
 router.get(
     "/:projectId/tasks/:taskId",
-    param("taskId").isMongoId().withMessage("Invalid task id"),
+    param("taskId").isMongoId().withMessage("ID de tarea inválido"),
     handleInputErrors,
     TaskController.getTaskById
 );
@@ -77,17 +96,20 @@ router.get(
 // Update task
 router.put(
     "/:projectId/tasks/:taskId",
-
-    param("taskId").isMongoId().withMessage("Invalid task id"),
-    body("name").notEmpty().withMessage("task name is required"),
-    body("description").notEmpty().withMessage("task description is required"),
+    hasAutorization,
+    param("taskId").isMongoId().withMessage("ID de tarea inválido"),
+    body("name").notEmpty().withMessage("El nombre de la tarea es requerido"),
+    body("description")
+        .notEmpty()
+        .withMessage("La descripción de la tarea es requerida"),
     handleInputErrors,
     TaskController.updateTask
 );
 // delete task
 router.delete(
     "/:projectId/tasks/:taskId",
-    param("taskId").isMongoId().withMessage("Invalid task id"),
+    hasAutorization,
+    param("taskId").isMongoId().withMessage("Accion no permitida"),
     handleInputErrors,
     TaskController.deleteTask
 );
@@ -95,9 +117,37 @@ router.delete(
 // task status
 router.post(
     "/:projectId/tasks/:taskId/status",
-    param("taskId").isMongoId().withMessage("Invalid task id"),
-    body("status").notEmpty().withMessage("task status is required"),
+    param("taskId").isMongoId().withMessage("ID de tarea inválido"),
+    body("status").notEmpty().withMessage("El estado de la tarea es requerido"),
     handleInputErrors,
     TaskController.updateStatus
 );
+
+// routes for teams
+router.post(
+    "/:projectId/team/find",
+    body("email").isEmail().toLowerCase().withMessage("Email no válido"),
+    handleInputErrors,
+    TeamMemberController.findMemberByEmail
+);
+
+// Get project team
+router.get("/:projectId/team", TeamMemberController.getProjectTeam);
+
+// Add member to project team
+router.post(
+    "/:projectId/team",
+    body("id").isMongoId().withMessage("ID no válido"),
+    handleInputErrors,
+    TeamMemberController.addMemberById
+);
+
+// Remove member from project team
+router.delete(
+    "/:projectId/team/:userId",
+    param("userId").isMongoId().withMessage("ID no válido"),
+    handleInputErrors,
+    TeamMemberController.removeMemberById
+);
+
 export default router;

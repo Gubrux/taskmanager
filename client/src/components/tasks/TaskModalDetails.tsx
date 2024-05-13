@@ -40,6 +40,7 @@ export default function TaskModalDetails() {
             toast.success(data);
             queryClient.invalidateQueries({ queryKey: ["project", projectId] });
             queryClient.invalidateQueries({ queryKey: ["task", taskId] });
+            navigate(location.pathname, { replace: true });
         },
     });
 
@@ -53,7 +54,6 @@ export default function TaskModalDetails() {
         toast.error(`Tarea no encontrada`, { toastId: "error" });
         return <Navigate to={`/projects/${projectId}`} />;
     }
-
     if (data)
         return (
             <>
@@ -106,6 +106,16 @@ export default function TaskModalDetails() {
                                         <p className="text-lg text-slate-500 mb-2">
                                             Descripción:{data.description}
                                         </p>
+                                        {data.completedBy && (
+                                            <p>
+                                                <span className="font-bold text-slate-600">
+                                                    Ultima actualizacion hecha
+                                                    por:{" "}
+                                                </span>
+                                                {data.completedBy.name} -{" "}
+                                                {data.completedBy.email}
+                                            </p>
+                                        )}
                                         <div className="my-5 space-y-3">
                                             <label className="font-bold">
                                                 Estado Actual:

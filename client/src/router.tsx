@@ -4,13 +4,14 @@ import AuthLayout from "@/layouts/AuthLayout";
 import LoginView from "@/views/auth/LoginView";
 import DashboardView from "@/views/DashboardView";
 import RegisterView from "@/views/auth/RegisterView";
+import NewPasswordView from "@/views/auth/NewPasswordView";
 import EditProjectView from "@/views/projects/EditProjectView";
-import CreateProjectView from "@/views/projects/CreateProjectView";
-import ProjectDetailsView from "@/views/projects/ProjectDetailsView";
+import ProjectTeamView from "@/views/projects/ProjectTeamView";
 import ConfirmAccountView from "@/views/auth/ConfirmAccountView";
 import RequestNewCodeView from "@/views/auth/RequestNewCodeView";
 import ForgotPasswordView from "@/views/auth/ForgotPasswordView";
-import NewPasswordView from "./views/auth/NewPasswordView";
+import CreateProjectView from "@/views/projects/CreateProjectView";
+import ProjectDetailsView from "@/views/projects/ProjectDetailsView";
 
 import "./index.css";
 
@@ -18,6 +19,7 @@ export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
+                {/* app routes */}
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<DashboardView />} index />
                     <Route
@@ -32,7 +34,12 @@ export default function Router() {
                         path="/projects/:projectId/edit"
                         element={<EditProjectView />}
                     />
+                    <Route
+                        path="/projects/:projectId/team"
+                        element={<ProjectTeamView />}
+                    />
                 </Route>
+                {/* auth routes */}
                 <Route element={<AuthLayout />}>
                     <Route path="/auth/login" element={<LoginView />} />
                     <Route path="/auth/register" element={<RegisterView />} />

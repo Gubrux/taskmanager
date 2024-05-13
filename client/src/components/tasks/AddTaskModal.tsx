@@ -35,7 +35,7 @@ export default function AddTaskModal() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({
-                queryKey: ["editProject", projectId],
+                queryKey: ["project", projectId],
             });
             toast.success(data);
             reset();
@@ -111,7 +111,7 @@ export default function AddTaskModal() {
                                         <input
                                             value="Guardar Tarea"
                                             type="submit"
-                                            className="bg-sky-500 hover:hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 p-3 text-white uppercase font-bold cursor-pointer transition-colors mt-5"
+                                            className="bg-sky-500 hover:hover-gradient p-3 text-white uppercase font-bold cursor-pointer transition-colors mt-5"
                                         />
                                     </form>
                                 </Dialog.Panel>

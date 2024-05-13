@@ -74,20 +74,20 @@ export default function RegisterView() {
                 <input
                     type="submit"
                     value="Enviar Código"
-                    className="bg-sky-600 hover:bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-500 w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer"
+                    className="bg-sky-600 hover:hover-gradient w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer"
                 />
             </form>
 
             <nav className="mt-10 flex flex-col space-y-4">
                 <Link
                     to="/auth/login"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 hover:text-sky-500 font-normal"
                 >
                     ¿Ya tienes cuenta? Iniciar Sesión
                 </Link>
                 <Link
                     to="/auth/forgot-password"
-                    className="text-center text-gray-300 font-normal"
+                    className="text-center text-gray-300 hover:text-sky-500 font-normal"
                 >
                     ¿Olvidaste tu contraseña? Reestablecer
                 </Link>
