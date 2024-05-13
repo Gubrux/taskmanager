@@ -33,6 +33,7 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
         mutationFn: updateTask,
         onError: (error: Error) => {
             toast.error(error.message);
+            navigate(location.pathname, { replace: true });
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({
