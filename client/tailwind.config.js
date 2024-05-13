@@ -12,6 +12,7 @@ export default {
         },
     },
     plugins: [
+        require("@tailwindcss/forms"),
         function ({ addUtilities }) {
             const newUtilities = {
                 ".hover-gradient": {
