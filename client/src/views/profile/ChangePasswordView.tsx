@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import ErrorMessage from "@/components/ErrorMessage";
 import { UpdateCurrentUserPasswordForm } from "@/types/index";
-import { useMutation} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { changePassword } from "@/api/ProfileAPI";
 import { toast } from "react-toastify";
 
@@ -20,7 +20,7 @@ export default function ChangePasswordView() {
     } = useForm({ defaultValues: initialValues });
 
     const password = watch("password");
-    const {mutate} = useMutation({
+    const { mutate } = useMutation({
         mutationFn: changePassword,
         onError: (error: Error) => {
             toast.error(error.message);
@@ -28,12 +28,10 @@ export default function ChangePasswordView() {
         onSuccess: (data) => {
             toast.success(data);
         },
-    })
+    });
 
-
-    const handleChangePassword = (
-        formData: UpdateCurrentUserPasswordForm
-    ) => mutate(formData);
+    const handleChangePassword = (formData: UpdateCurrentUserPasswordForm) =>
+        mutate(formData);
 
     return (
         <>
@@ -128,7 +126,7 @@ export default function ChangePasswordView() {
                     <input
                         type="submit"
                         value="Cambiar Password"
-                        className="bg-fuchsia-600 w-full p-3 text-white uppercase font-bold hover:bg-fuchsia-700 cursor-pointer transition-colors"
+                        className="bg-sky-600 hover:hover-gradient w-full p-3 text-white uppercase font-bold hover:hoverhover-gradient cursor-pointer transition-colors"
                     />
                 </form>
             </div>
