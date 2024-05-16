@@ -19,7 +19,10 @@ export type UserRegistrationForm = Pick<
 export type RequestConfirmationCodeForm = Pick<Auth, "email">;
 export type ForgotPasswordForm = Pick<Auth, "email">;
 export type NewPasswordForm = Pick<Auth, "password" | "password_confirmation">;
-export type UpdateCurrentUserPasswordForm = Pick<Auth, "current_password" | "password" | "password_confirmation">;
+export type UpdateCurrentUserPasswordForm = Pick<
+    Auth,
+    "current_password" | "password" | "password_confirmation"
+>;
 export type ConfirmToken = Pick<Auth, "token">;
 export type CheckPasswordForm = Pick<Auth, "password">;
 //
@@ -75,13 +78,27 @@ export const taskSchema = z.object({
 });
 export type Task = z.infer<typeof taskSchema>;
 export type TaskFormData = Pick<Task, "name" | "description">;
-
+export const taskProjectSchema = taskSchema.pick({
+    _id: true,
+    name: true,
+    description: true,
+    status: true,
+});
+export type TaskProject = z.infer<typeof taskProjectSchema>;
 export const projectSchema = z.object({
     _id: z.string(),
     projectName: z.string(),
     clientName: z.string(),
     description: z.string(),
     manager: z.string(userSchema.pick({ _id: true })),
+    tasks: z.array(taskProjectSchema),
+    team: z.array(z.string(userSchema.pick({ _id: true })))
+
+});
+export const editProjectSchema = projectSchema.pick({
+    projectName: true,
+    clientName: true,
+    description: true,
 });
 export const dashboardProjectSchema = z.array(
     projectSchema.pick({
