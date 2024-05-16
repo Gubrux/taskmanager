@@ -71,9 +71,7 @@ export default function Router() {
                         element={<NewPasswordView />}
                     />
                 </Route>
-                <Route>
-                    <Route path="*" element={<NotFound />} />
-                </Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
