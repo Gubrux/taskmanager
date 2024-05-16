@@ -17,6 +17,7 @@ import "./index.css";
 import ProfileView from "@/views/profile/ProfileView";
 import ChangePasswordView from "@/views/profile/ChangePasswordView";
 import ProfileLayout from "@/layouts/ProfileLayout";
+import NotFound from "./views/404/NotFound";
 
 export default function Router() {
     return (
@@ -70,6 +71,7 @@ export default function Router() {
                         element={<NewPasswordView />}
                     />
                 </Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
