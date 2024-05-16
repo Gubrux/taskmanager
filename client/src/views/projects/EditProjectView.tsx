@@ -1,6 +1,6 @@
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProjectsById } from "@/api/ProjectAPI";
+import { getFullProject } from "@/api/ProjectAPI";
 import EditProjectForm from "@/components/projects/EditProjectForm";
 
 export default function EditProjectView() {
@@ -8,7 +8,7 @@ export default function EditProjectView() {
     const projectId = params.projectId!;
     const { data, isLoading, isError } = useQuery({
         queryKey: ["editProject", projectId],
-        queryFn: () => getProjectsById(projectId),
+        queryFn: () => getFullProject(projectId),
         retry: false,
     });
     if (isLoading) return "cargando...";
