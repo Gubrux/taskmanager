@@ -3,7 +3,8 @@ export default function Spaceman() {
         <>
             <img
                 className="aspect-video"
-                alt="404 not found"
+                src="../../../assets/spaceman.png"
+                alt="404 not foundsss"
             />
         </>
     );
