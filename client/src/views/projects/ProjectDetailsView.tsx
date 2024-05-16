@@ -1,6 +1,6 @@
 import { Navigate, useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProjectsById } from "@/api/ProjectAPI";
+import { getFullProject } from "@/api/ProjectAPI";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import TaskList from "@/components/tasks/TaskList";
 import EdistTaskData from "@/components/tasks/EdistTaskData";
@@ -16,7 +16,7 @@ export default function ProjectDetailsView() {
     const projectId = params.projectId!;
     const { data, isLoading, isError } = useQuery({
         queryKey: ["project", projectId],
-        queryFn: () => getProjectsById(projectId),
+        queryFn: () => getFullProject(projectId),
         retry: false,
     });
     const canEdit = useMemo(() => data?.manager === user?._id, [data, user]);
