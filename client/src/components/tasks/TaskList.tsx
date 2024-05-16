@@ -54,7 +54,11 @@ export default function TaskList({ tasks, canEdit }: TaskListProps) {
                                 </li>
                             ) : (
                                 tasks.map((task) => (
-                                    <TaskCard key={task._id} task={task} canEdit={canEdit}/>
+                                    <TaskCard
+                                        key={task._id}
+                                        task={task}
+                                        canEdit={canEdit}
+                                    />
                                 ))
                             )}
                         </ul>

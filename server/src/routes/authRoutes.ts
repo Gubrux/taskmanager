@@ -69,7 +69,45 @@ router.post(
     handleInputErrors,
     AuthController.updatePassWithToken
 );
-
+// Authenticated routes
 router.get("/user", authenticate, AuthController.user);
+// Update user profile
+router.put(
+    "/profile",
+    authenticate,
+    body("name").notEmpty().withMessage("El nombre es requerido"),
+    body("email").isEmail().withMessage("email no es valido"),
+    handleInputErrors,
+    AuthController.updateProfile
+);
+
+router.post(
+    "/update-password",
+    authenticate,
+    body("current_password")
+        .notEmpty()
+        .withMessage("La contraseña actual no puede ir vacia"),
+    body("password")
+        .isLength({ min: 8 })
+        .withMessage("la contraseña debe tener al menos 8 caracteres"),
+    body("password_confirmation").custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error("Las contraseñas no coinciden");
+        }
+        return true;
+    }),
+    handleInputErrors,
+    AuthController.updateCurrentUserPassword
+);
+
+router.post(
+    "/check-password",
+    authenticate,
+    body("password")
+        .notEmpty()
+        .withMessage("La contraseña no puede ir vacia"),
+    handleInputErrors,
+    AuthController.checkPassword
+);
 
 export default router;

@@ -20,7 +20,6 @@ export default function ProjectDetailsView() {
         retry: false,
     });
     const canEdit = useMemo(() => data?.manager === user?._id, [data, user]);
-    console.log(canEdit);
     if (isLoading && authLoading) return "cargando...";
     if (isError) return <Navigate to="/404" />;
     if (data && user)
