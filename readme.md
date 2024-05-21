@@ -125,7 +125,3 @@ Este proyecto es una aplicación de gestión de tareas con un backend basado en 
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Por favor, abre un issue para discutir cualquier cambio importante antes de realizar un pull request.
-
-## Licencia
-
-[MIT](LICENSE)
