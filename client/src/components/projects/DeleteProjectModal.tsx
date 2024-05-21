@@ -90,7 +90,7 @@ export default function DeleteProjectModal() {
 
                                 <p className="text-xl font-bold">
                                     Confirma la eliminación del proyecto {""}
-                                    <span className="text-fuchsia-600">
+                                    <span className="text-sky-600">
                                         colocando tu password
                                     </span>
                                 </p>
