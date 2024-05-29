@@ -10,6 +10,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@types/nodemailer": "^6.4.15",
         "bcrypt": "^5.1.1",
         "colors": "^1.4.0",
         "cors": "^2.8.5",
@@ -27,7 +28,6 @@
         "@types/express": "^4.17.21",
         "@types/jsonwebtoken": "^9.0.6",
         "@types/morgan": "^1.9.9",
-        "@types/nodemailer": "^6.4.15",
         "nodemon": "^3.1.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.4.5"
