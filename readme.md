@@ -1,7 +1,9 @@
 # Task Manager
 
 Este proyecto es una aplicación de gestión de tareas con un backend basado en Node.js y Express, y un frontend creado con React y Vite.
+# Link al proyecto: https://tickedfrontend.vercel.app/auth/login
 
+## <img src="https://skillicons.dev/icons?i=vercel"/> Deploy hecho con Vercel para el frontend   y Render para el backend
 ## Requisitos
 
 - Node.js
