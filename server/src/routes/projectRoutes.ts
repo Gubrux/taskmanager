@@ -12,6 +12,7 @@ import {
 import { authenticate } from "../middleware/auth";
 import { TeamMemberController } from "../controllers/TeamController";
 import { NoteController } from "../controllers/NoteController";
+import Note from "../models/Note";
 
 const router = Router();
 
