@@ -11,8 +11,8 @@ import {
 } from "../middleware/task";
 import { authenticate } from "../middleware/auth";
 import { TeamMemberController } from "../controllers/TeamController";
-import Note from "../models/Note";
 import { NoteController } from "../controllers/NoteController";
+import Note from "../models/Note";
 
 const router = Router();
 
@@ -44,10 +44,13 @@ router.get(
     ProjectController.getAllProjectById
 );
 
+// Routes for tasks
+router.param("projectId", projectExists);
+
 // Update project
 router.put(
-    "/:id",
-    param("id").isMongoId().withMessage("ID de proyecto inválido"),
+    "/:projectId",
+    param("projectId").isMongoId().withMessage("ID de proyecto inválido"),
     body("projectName")
         .notEmpty()
         .withMessage("El nombre del proyecto es requerido"),
@@ -58,18 +61,18 @@ router.put(
         .notEmpty()
         .withMessage("La descripción del proyecto es requerida"),
     handleInputErrors,
+    hasAutorization,
     ProjectController.updateProject
 );
 
 router.delete(
-    "/:id",
-    param("id").isMongoId().withMessage("ID de proyecto inválido"),
+    "/:projectId",
+    param("projectId").isMongoId().withMessage("ID de proyecto inválido"),
     handleInputErrors,
+    hasAutorization,
     ProjectController.deleteProject
 );
 
-// Routes for tasks
-router.param("projectId", projectExists);
 // Create task
 router.post(
     "/:projectId/tasks",
@@ -151,7 +154,6 @@ router.delete(
     handleInputErrors,
     TeamMemberController.removeMemberById
 );
-
 // routes for notes
 router.post(
     "/:projectId/tasks/:taskId/notes",
@@ -161,5 +163,13 @@ router.post(
     handleInputErrors,
     NoteController.createNote
 );
-
+// get notes
+router.get("/:projectId/tasks/:taskId/notes", NoteController.getTaskNotes);
+// delete note
+router.delete(
+    "/:projectId/tasks/:taskId/notes/:noteId",
+    param("noteId").isMongoId().withMessage("ID no válido"),
+    handleInputErrors,
+    NoteController.deleteNote
+);
 export default router;
